@@ -2,7 +2,7 @@
 // Created by Sydney Hildreth on 4/27/20.
 //
 
-#include "shape2d.h"
+#include "Shape2d.h"
 using namespace std;
 
 /********************* Point2D Struct ********************/

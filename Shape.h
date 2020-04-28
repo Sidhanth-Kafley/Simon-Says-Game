@@ -5,7 +5,7 @@
 #ifndef SH_SK_FINAL_PROJECT_GRAPHICS_SHAPE_H
 #define SH_SK_FINAL_PROJECT_GRAPHICS_SHAPE_H
 
-#include <math.h> // This allows you to use sqrt and pow functions
+#include <cmath> // This allows you to use sqrt and pow functions
 #include <string>
 
 const double PI = 3.14159265358979323846;

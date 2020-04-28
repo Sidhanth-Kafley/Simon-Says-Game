@@ -2,7 +2,7 @@
 // Created by Sydney Hildreth on 4/27/20.
 //
 
-#include "shape.h"
+#include "Shape.h"
 #include <iostream>
 using namespace std;
 

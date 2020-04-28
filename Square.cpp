@@ -5,6 +5,7 @@
 
 #include "Square.h"
 #include<cmath>
+#include "Graphics.h"
 
 /********************* Square Class *********************/
 
@@ -56,15 +57,6 @@ void Square::setSide(double pSide){
         side = pSide;
     }
 }
-double Square::calculateArea() const {
-    double area = pow(side, 2);
-    return area;
-}
-
-double Square::calculatePerimeter() const {
-    double perimeter = 4*side;
-    return perimeter;
-}
 
 void Square::move(double deltaX, double deltaY) {
     center.x += deltaX;
@@ -77,6 +69,22 @@ void Square::moveX(double deltaX) {
 
 void Square::moveY(double deltaY) {
     center.y += deltaY;
+}
+
+void Square::draw() const {
+    glColor3f(1.0, 1.0, 1.0);
+    glBegin(GL_QUADS);
+    // glVertex2i takes a 2-D (x, y) coordinate
+    glVertex2i(50, 100);
+
+
+    glVertex2i(50, 250);
+
+
+    glVertex2i(250, 250);
+
+    glVertex2i(250, 100);
+    glEnd();
 }
 
 

@@ -7,7 +7,7 @@
 
 #include <iomanip>
 #include <iostream>
-#include "shape.h"
+#include "Shape.h"
 
 struct point2D {
     double x;

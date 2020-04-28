@@ -5,8 +5,8 @@
 #ifndef SH_SK_FINAL_PROJECT_GRAPHICS_SQUARE_H
 #define SH_SK_FINAL_PROJECT_GRAPHICS_SQUARE_H
 
-#include "shape.h"
-#include "shape2d.h"
+#include "Shape.h"
+#include "Shape2d.h"
 
 
 class Square: public Shape2D{
@@ -26,6 +26,9 @@ public:
     //Destructor
     ~Square() override = default;
 
+    //Draw Square
+    void draw() const;
+
     //Getters
     double getSide() const;
 
@@ -33,8 +36,7 @@ public:
     void setSide(double pSide);
 
     //Override virtual methods
-    virtual double calculateArea() const override;
-    virtual double calculatePerimeter() const override;
+
     virtual void move(double deltaX, double deltaY) override;;
     virtual void moveX(double deltaX) override;
     virtual void moveY(double deltaY) override;

@@ -71,7 +71,7 @@ void Square::moveY(double deltaY) {
     center.y += deltaY;
 }
 
-void Square::draw() const {
+void Square::draw() const{
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_QUADS);
     // glVertex2i takes a 2-D (x, y) coordinate

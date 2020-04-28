@@ -146,5 +146,9 @@ void Circle::moveY(double deltaY){
     }
 }
 
+void Circle::draw() const {
+
+}
+
 
 

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "Square.h"
+
 using namespace std;
 
 GLdouble width, height;
@@ -53,7 +54,11 @@ void kbd(unsigned char key, int x, int y)
         glutDestroyWindow(wd);
         exit(0);
     }
+    switch(key){
+        case 'x': start();
+            break;
 
+    }
     glutPostRedisplay();
 }
 
@@ -93,7 +98,9 @@ void timer(int dummy) {
     glutPostRedisplay();
     glutTimerFunc(30, timer, dummy);
 }
+void start(){
 
+}
 /* Main function: GLUT runs as a console application starting at main()  */
 int main(int argc, char** argv) {
 
@@ -132,5 +139,13 @@ int main(int argc, char** argv) {
 
     // Enter the event-processing loop
     glutMainLoop();
+
+    vector<string> buttonColours = {"red", "blue", "green", "yellow"};
+
+    vector<string> gamePattern = {};
+    vector<string> userClickedPattern = {};
+
+    int level = 0;
+
     return 0;
 }

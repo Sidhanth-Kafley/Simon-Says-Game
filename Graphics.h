@@ -41,4 +41,6 @@ void timer(int dummy);
 // Handle mouse button pressed and released events
 void mouse(int button, int state, int x, int y);
 
+void start();
+
 #endif /* graphics_h */

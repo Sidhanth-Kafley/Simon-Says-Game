@@ -92,3 +92,4 @@ ostream& operator << (std::ostream& outs, const Shape2D &shape) {
          setw(15) << shape.getCenter();
     return outs;
 }
+

@@ -21,30 +21,21 @@ struct color {
     color(double r, double g, double b);
     color(double r, double g, double b, double a);
 
+
     /* Overloaded Operator */
     friend std::ostream& operator << (std::ostream& outs, const color &c);
+};
+
+struct point {
+    int x;
+    int y;
 };
 
 class Shape {
 protected:
     enum shapeType {
         circle,
-        square,
-        rectangle,
-        triangle,
-        parallelogram,
-        ellipse,
-        trapezoid,
-        cube,
-        rectangularPrism,
-        triangularPrism,
-        sphere,
-        triangularPyramid,
-        squarePyramid,
-        cylinder,
-        cone,
-        ellipsoid,
-        torus
+        square
     };
     color fill;
     shapeType type;
@@ -73,6 +64,10 @@ public:
     void setGreen(double g);
     void setBlue(double b);
     void setOpacity(double a);
+
+    //virtual void draw() = 0;
+   // virtual void draw() const;
+    virtual void draw() const = 0;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SHAPE_H

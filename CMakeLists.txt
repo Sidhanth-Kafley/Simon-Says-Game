@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(SH_SK_Final_Project_Graphics)
+project(SH-SK-Final-Project-Graphics)
 
 if (WIN32)
     set(FREEGLUT_INCLUDE_DIRS "C:/Program\ Files/Common\ Files/freeglut/include")
@@ -28,7 +28,7 @@ file(GLOB SOURCE_FILES
         *.h
         )
 
-add_executable(graphics ${SOURCE_FILES} Shape.h Shape.cpp Shape2d.cpp Shape2d.h Square.h Square.cpp)
+add_executable(graphics ${SOURCE_FILES} Shape.h Shape.cpp Shape2d.cpp Shape2d.h Square.h Square.cpp Circle.h Circle.cpp)
 
 if (WIN32)
     target_link_libraries (graphics ${OPENGL_LIBRARIES} freeglut)

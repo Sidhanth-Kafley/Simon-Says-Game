@@ -14,6 +14,10 @@
 #include <GL/glut.h>
 #endif
 
+enum screen{
+    startGame, game, finish
+};
+
 // Program initialization NOT OpenGL/GLUT dependent,
 // as we haven't created a GLUT window yet
 void init();

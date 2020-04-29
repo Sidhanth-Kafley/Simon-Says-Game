@@ -2,15 +2,23 @@
 #include <iostream>
 #include <vector>
 #include "Square.h"
+#include "Button.h"
+#include "Circle.h"
 
 using namespace std;
 
 GLdouble width, height;
 int wd;
-Square s;
+Square first;
+Square second;
+Square third;
+Square fourth;
+Circle c(250,200);
+Button button1({1,0,0}, {100,100}, 100, 50, "Square");
+screen state = startGame;
 void init() {
-    width = 700;
-    height = 700;
+    width = 900;
+    height = 900;
 }
 
 /* Initialize OpenGL Graphics */
@@ -41,7 +49,30 @@ void display() {
      */
     // Set the color to draw
     // Note: you can change this at any time during the drawing process
-    s.draw();
+   // s.draw();
+    //button1.draw();
+    //c.draw();
+    //first.move(245,450);
+    if (state == startGame) {
+        glColor3f(1.0, 0.0, 0.0);
+        glRasterPos2i(245, 450);
+        for (const char &letter : "Welcome to Simon Says! Press g to begin!"){
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
+        }
+    } else if (state == game) {
+
+        first.draw();
+        first.move(245,450);
+        //second.draw();
+
+
+    } else if (state == finish) {
+        glColor3f(1.0, 0.0, 0.0);
+        glRasterPos2i(130, 200);
+        for (const char &letter : "Game over!"){
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
+        }
+    }
 
     glFlush();  // Render now
 }
@@ -58,6 +89,10 @@ void kbd(unsigned char key, int x, int y)
         case 'x': start();
             break;
 
+    }
+
+    if (state == startGame && key == 'g'){
+        state = game;
     }
     glutPostRedisplay();
 }
@@ -89,7 +124,11 @@ void cursor(int x, int y) {
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
 void mouse(int button, int state, int x, int y) {
-
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        first.setColor(0,1,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        first.setColor(1,1,1,1);
+    }
     glutPostRedisplay();
 }
 
@@ -111,7 +150,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_RGBA);
 
     glutInitWindowSize((int)width, (int)height);
-    glutInitWindowPosition(-1, -1); // Position the window's initial top-left corner
+    glutInitWindowPosition(100, 200); // Position the window's initial top-left corner
     /* create the window and store the handle to it */
     wd = glutCreateWindow("Simon Says" /* title */ );
 

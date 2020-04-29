@@ -3,12 +3,14 @@
 #include <vector>
 #include "Square.h"
 #include "Button.h"
+#include "Circle.h"
 
 using namespace std;
 
 GLdouble width, height;
 int wd;
 Square s;
+Circle c(250,200);
 Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 void init() {
     width = 700;
@@ -44,7 +46,8 @@ void display() {
     // Set the color to draw
     // Note: you can change this at any time during the drawing process
     s.draw();
-    button1.draw();
+    //button1.draw();
+    //c.draw();
 
     glFlush();  // Render now
 }
@@ -92,8 +95,10 @@ void cursor(int x, int y) {
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
 void mouse(int button, int state, int x, int y) {
-    if (button == GLUT_LEFT_BUTTON){
-        button1.pressDown();
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        s.setColor(0,1,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        s.setColor(1,1,1,1);
     }
     glutPostRedisplay();
 }

@@ -54,7 +54,7 @@ public:
     virtual void moveY(double deltaY);
 
     //virtual void draw() = 0;
-    void draw() const;
+    //void draw() const;
 
 
     /* Overloaded Operator */

@@ -35,22 +35,7 @@ class Shape {
 protected:
     enum shapeType {
         circle,
-        square,
-        rectangle,
-        triangle,
-        parallelogram,
-        ellipse,
-        trapezoid,
-        cube,
-        rectangularPrism,
-        triangularPrism,
-        sphere,
-        triangularPyramid,
-        squarePyramid,
-        cylinder,
-        cone,
-        ellipsoid,
-        torus
+        square
     };
     color fill;
     shapeType type;
@@ -81,7 +66,8 @@ public:
     void setOpacity(double a);
 
     //virtual void draw() = 0;
-    virtual void draw() const;
+   // virtual void draw() const;
+    virtual void draw() const = 0;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SHAPE_H

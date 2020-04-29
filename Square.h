@@ -27,8 +27,6 @@ public:
     //Destructor
     ~Square() override = default;
 
-    //Draw Square
-    //void draw() const;
 
     //Getters
     double getSide() const;
@@ -42,8 +40,8 @@ public:
     virtual void moveX(double deltaX) override;
     virtual void moveY(double deltaY) override;
 
-    //virtual void  draw() = 0;
-    virtual void draw() const;
+
+    void draw() const override;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SQUARE_H

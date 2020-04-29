@@ -7,6 +7,7 @@
 //
 
 #include "Circle.h"
+#include "Graphics.h"
 
 Circle::Circle() : Shape2D(){
     radius = defaultValue;
@@ -147,7 +148,14 @@ void Circle::moveY(double deltaY){
 }
 
 void Circle::draw() const {
-
+    glColor3f(fill.red, fill.green, fill.blue);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2i(center.x, center.y);
+    for (double i = 0; i < 2.0 * PI + 0.05; i += (2.0 * PI) / 360.0) {
+        glVertex2i(center.x + (radius * cos(i)),
+                center.y + (radius * sin(i)));
+    }
+    glEnd();
 }
 
 

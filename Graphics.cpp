@@ -12,9 +12,10 @@ int wd;
 Square s;
 Circle c(250,200);
 Button button1({1,0,0}, {100,100}, 100, 50, "Square");
+screen state = startGame;
 void init() {
-    width = 700;
-    height = 700;
+    width = 900;
+    height = 900;
 }
 
 /* Initialize OpenGL Graphics */
@@ -45,9 +46,28 @@ void display() {
      */
     // Set the color to draw
     // Note: you can change this at any time during the drawing process
-    s.draw();
+   // s.draw();
     //button1.draw();
     //c.draw();
+
+    if (state == startGame) {
+        glColor3f(1.0, 0.0, 0.0);
+        glRasterPos2i(245, 450);
+        for (const char &letter : "Welcome to Simon Says! Press g to begin!"){
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
+        }
+    } else if (state == game) {
+
+        s.draw();
+
+
+    } else if (state == finish) {
+        glColor3f(1.0, 0.0, 0.0);
+        glRasterPos2i(130, 200);
+        for (const char &letter : "Game over!"){
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
+        }
+    }
 
     glFlush();  // Render now
 }
@@ -64,6 +84,10 @@ void kbd(unsigned char key, int x, int y)
         case 'x': start();
             break;
 
+    }
+
+    if (state == startGame && key == 'g'){
+        state = game;
     }
     glutPostRedisplay();
 }

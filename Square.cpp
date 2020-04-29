@@ -27,7 +27,7 @@ Square::Square(point2D center, double pSide) : Shape2D(center) {
         side = pSide;
     }
 }
-Square::Square( double pSide){
+Square::Square(double pSide){
     type = square;
     if(pSide < 0){
         side = 1;

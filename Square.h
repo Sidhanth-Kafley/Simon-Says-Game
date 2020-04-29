@@ -7,6 +7,7 @@
 
 #include "Shape.h"
 #include "Shape2d.h"
+#include "Graphics.h"
 
 
 class Square: public Shape2D{
@@ -26,8 +27,6 @@ public:
     //Destructor
     ~Square() override = default;
 
-    //Draw Square
-    void draw() const;
 
     //Getters
     double getSide() const;
@@ -40,6 +39,9 @@ public:
     virtual void move(double deltaX, double deltaY) override;;
     virtual void moveX(double deltaX) override;
     virtual void moveY(double deltaY) override;
+
+
+    void draw() const override;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SQUARE_H

@@ -2,12 +2,16 @@
 #include <iostream>
 #include <vector>
 #include "Square.h"
+#include "Button.h"
+#include "Circle.h"
 
 using namespace std;
 
 GLdouble width, height;
 int wd;
 Square s;
+Circle c(250,200);
+Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 void init() {
     width = 700;
     height = 700;
@@ -42,6 +46,8 @@ void display() {
     // Set the color to draw
     // Note: you can change this at any time during the drawing process
     s.draw();
+    //button1.draw();
+    //c.draw();
 
     glFlush();  // Render now
 }
@@ -89,7 +95,11 @@ void cursor(int x, int y) {
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
 void mouse(int button, int state, int x, int y) {
-
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        s.setColor(0,1,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        s.setColor(1,1,1,1);
+    }
     glutPostRedisplay();
 }
 
@@ -111,7 +121,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_RGBA);
 
     glutInitWindowSize((int)width, (int)height);
-    glutInitWindowPosition(-1, -1); // Position the window's initial top-left corner
+    glutInitWindowPosition(100, 200); // Position the window's initial top-left corner
     /* create the window and store the handle to it */
     wd = glutCreateWindow("Simon Says" /* title */ );
 

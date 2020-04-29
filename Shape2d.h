@@ -53,6 +53,8 @@ public:
     virtual void moveX(double deltaX);
     virtual void moveY(double deltaY);
 
+    //virtual void draw() = 0;
+    //void draw() const;
 
 
     /* Overloaded Operator */

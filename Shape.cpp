@@ -59,21 +59,7 @@ string Shape::getType() const {
     switch (type) {
         case circle: return "circle";
         case square: return "square";
-        case rectangle: return "rectangle";
-        case triangle: return "triangle";
-        case parallelogram: return "parallelogram";
-        case ellipse: return "ellipse";
-        case trapezoid: return "trapezoid";
-        case cube: return "cube";
-        case rectangularPrism: return "rectangular prism";
-        case triangularPrism: return "triangular prism";
-        case sphere: return "sphere";
-        case triangularPyramid: return "triangular pyramid";
-        case squarePyramid: return "square pyramid";
-        case cylinder: return "cylinder";
-        case cone: return "cone";
-        case ellipsoid: return "ellipsoid";
-        case torus: return "torus";
+
     }
 }
 

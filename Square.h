@@ -41,7 +41,7 @@ public:
     virtual void moveY(double deltaY) override;
 
 
-    void draw() const override;
+    void draw(int x, int y) const override;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SQUARE_H

@@ -67,7 +67,7 @@ public:
 
     //virtual void draw() = 0;
    // virtual void draw() const;
-    virtual void draw() const = 0;
+    virtual void draw(int x, int y) const = 0;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SHAPE_H

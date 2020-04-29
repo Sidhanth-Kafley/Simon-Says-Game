@@ -24,7 +24,7 @@ void init() {
 /* Initialize OpenGL Graphics */
 void initGL() {
     // Set "clearing" or background color
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Black and opaque
+    glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Black and opaque
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
@@ -61,9 +61,11 @@ void display() {
         }
     } else if (state == game) {
 
-        first.draw();
+        first.draw(50, 100);
         first.move(245,450);
-        //second.draw();
+        second.draw(500, 100);
+        third.draw(50, 500);
+        fourth.draw(500, 500);
 
 
     } else if (state == finish) {
@@ -127,7 +129,19 @@ void mouse(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
         first.setColor(0,1,0,1);
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-        first.setColor(1,1,1,1);
+        first.setColor(0,0,0,1);
+    }if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        second.setColor(0,1,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        second.setColor(0,0,0,1);
+    }if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        third.setColor(0,1,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        third.setColor(0,0,0,1);
+    }if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        fourth.setColor(0,1,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        fourth.setColor(0,0,0,1);
     }
     glutPostRedisplay();
 }

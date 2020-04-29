@@ -147,7 +147,7 @@ void Circle::moveY(double deltaY){
     }
 }
 
-void Circle::draw() const {
+void Circle::draw(int x, int y) const {
     glColor3f(fill.red, fill.green, fill.blue);
     glBegin(GL_TRIANGLE_FAN);
     glVertex2i(center.x, center.y);

@@ -48,7 +48,6 @@ public:
     virtual void moveX(double deltaX) override;
     virtual void moveY(double deltaY) override;
 
-
     void draw(int x, int y) const override;
 };
 

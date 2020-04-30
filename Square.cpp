@@ -103,12 +103,12 @@ void Square::moveY(double deltaY) {
     center.y += deltaY;
 }
 
+
 void Square::draw(int x, int y) const{
     glColor3f(fill.red, fill.green, fill.blue);
     glBegin(GL_QUADS);
     // glVertex2i takes a 2-D (x, y) coordinate
     glVertex2i(x, y);
-
 
     glVertex2i(x, y+150);
 

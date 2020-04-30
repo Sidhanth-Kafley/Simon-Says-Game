@@ -132,18 +132,18 @@ void cursor(int x, int y) {
 
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
-void mouse1(int button, int state, int x, int y) {
+void mouse(int button, int state, int x, int y) {
     string number1 =  first.getType();
     string number2 =  second.getType();
     string number3 =  third.getType();
     string number4 =  fourth.getType();
 
 
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-        if (number1 == "square1"){
-            first.setColor(0,1,0,1);
-        }
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && number1 == "square1"){
 
+            first.setColor(0,1,0,1);
+
+/*
         if (number2 == "square2"){
             second.setColor(1,0,0,1);
         }
@@ -152,19 +152,25 @@ void mouse1(int button, int state, int x, int y) {
         }
         if (number4 == "square4"){
             second.setColor(1,0,1,1);
-        }
+        }*/
 
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
 
         if (number1 == "square1"){
             first.setColor(0,0,0,1);
-        } else if (number2 == "square2"){
-            first.setColor(0,0,0,1);
+        } /*else if (number2 == "square2"){
+            second.setColor(0,0,0,1);
         } else if (number3 == "square3"){
-            first.setColor(0,0,0,1);
+            third.setColor(0,0,0,1);
         }else if (number4 == "square4"){
-            first.setColor(0,0,0,1);
-        }
+            fourth.setColor(0,0,0,1);
+        }*/
+    }
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && number2 == "square2"){
+        second.setColor(1,0,0,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        second.setColor(0,0,0,1);
     }
 
     /*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
@@ -226,7 +232,7 @@ int main(int argc, char** argv) {
     glutPassiveMotionFunc(cursor);
 
     // handles mouse click
-    glutMouseFunc(mouse1);
+    glutMouseFunc(mouse);
     //glutMouseFunc(mouse2);
 
     // handles timer

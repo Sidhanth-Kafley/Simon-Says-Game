@@ -13,7 +13,7 @@ Square first;
 Square second;
 Square third;
 Square fourth;
-Circle c(250,200);
+
 Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 screen state = startGame;
 void init() {
@@ -60,12 +60,19 @@ void display() {
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
         }
     } else if (state == game) {
-
+        first.setType("square1");
         first.draw(50, 100);
         first.move(245,450);
+
+        second.setType("square2");
         second.draw(500, 100);
+
+        third.setType("square3");
         third.draw(50, 500);
+
+        fourth.setType("square4");
         fourth.draw(500, 500);
+
 
 
     } else if (state == finish) {
@@ -125,12 +132,42 @@ void cursor(int x, int y) {
 
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
-void mouse(int button, int state, int x, int y) {
+void mouse1(int button, int state, int x, int y) {
+    string number1 =  first.getType();
+    string number2 =  second.getType();
+    string number3 =  third.getType();
+    string number4 =  fourth.getType();
+
+
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-        first.setColor(0,1,0,1);
+        if (number1 == "square1"){
+            first.setColor(0,1,0,1);
+        }
+
+        if (number2 == "square2"){
+            second.setColor(1,0,0,1);
+        }
+        if (number3 == "square3"){
+            second.setColor(0,0,1,1);
+        }
+        if (number4 == "square4"){
+            second.setColor(1,0,1,1);
+        }
+
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-        first.setColor(0,0,0,1);
-    }if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+
+        if (number1 == "square1"){
+            first.setColor(0,0,0,1);
+        } else if (number2 == "square2"){
+            first.setColor(0,0,0,1);
+        } else if (number3 == "square3"){
+            first.setColor(0,0,0,1);
+        }else if (number4 == "square4"){
+            first.setColor(0,0,0,1);
+        }
+    }
+
+    /*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
         second.setColor(0,1,0,1);
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         second.setColor(0,0,0,1);
@@ -142,9 +179,13 @@ void mouse(int button, int state, int x, int y) {
         fourth.setColor(0,1,0,1);
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         fourth.setColor(0,0,0,1);
-    }
+    }*/
     glutPostRedisplay();
 }
+
+
+
+
 
 void timer(int dummy) {
 
@@ -185,7 +226,8 @@ int main(int argc, char** argv) {
     glutPassiveMotionFunc(cursor);
 
     // handles mouse click
-    glutMouseFunc(mouse);
+    glutMouseFunc(mouse1);
+    //glutMouseFunc(mouse2);
 
     // handles timer
     glutTimerFunc(0, timer, 0);

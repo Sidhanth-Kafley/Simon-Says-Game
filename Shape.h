@@ -65,6 +65,7 @@ public:
     void setBlue(double b);
     void setOpacity(double a);
 
+
     //virtual void draw() = 0;
    // virtual void draw() const;
     virtual void draw(int x, int y) const = 0;

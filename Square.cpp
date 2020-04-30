@@ -6,20 +6,21 @@
 #include "Square.h"
 #include<cmath>
 #include "Graphics.h"
+#include "string"
 
 /********************* Square Class *********************/
 
 Square::Square() : Shape2D(), side(2.0) {
-    type = square;
+
 }
 
 Square::Square(color fill) : Shape2D(fill), side(2.0) {
-    type = square;
+
 }
 Square::Square(double x, double y) : Shape2D(x, y) {
 }
 Square::Square(point2D center, double pSide) : Shape2D(center) {
-    type = square;
+
     if(pSide < 0){
         side = 1;
     }
@@ -28,7 +29,7 @@ Square::Square(point2D center, double pSide) : Shape2D(center) {
     }
 }
 Square::Square(double pSide){
-    type = square;
+
     if(pSide < 0){
         side = 1;
     }
@@ -37,7 +38,7 @@ Square::Square(double pSide){
     }
 }
 Square::Square(double red, double green, double blue, double alpha, double pSide) : Shape2D(red, green, blue, alpha) {
-    type = square;
+
     if(pSide < 0){
         side = 1;
     }
@@ -49,6 +50,19 @@ double Square::getSide() const{
     return side;
 }
 
+
+
+std::string Square::getType() const {
+    switch (square) {
+        case one: return "square1";
+        case two: return "square2";
+        case three: return "square3";
+        case four: return "square4";
+
+    }
+}
+
+
 void Square::setSide(double pSide){
     if(pSide < 0){
         side = 1;
@@ -58,6 +72,24 @@ void Square::setSide(double pSide){
     }
 }
 
+void Square::setType(std::string squareName) {
+    if(squareName == "square1"){
+        square = one;
+    }
+
+    if(squareName == "square2"){
+        square = two;
+    }
+
+    if(squareName == "square3"){
+        square = three;
+    }
+
+    if(squareName == "square4"){
+        square = four;
+    }
+
+}
 void Square::move(double deltaX, double deltaY) {
     center.x += deltaX;
     center.y += deltaY;

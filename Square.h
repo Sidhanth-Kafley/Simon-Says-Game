@@ -14,6 +14,14 @@ class Square: public Shape2D{
 
 private:
     double side;
+    enum typeSquare {
+        one,
+        two,
+        three,
+        four
+    };
+    typeSquare square;
+
 
 public:
     //Constructor
@@ -30,10 +38,10 @@ public:
 
     //Getters
     double getSide() const;
-
+    std::string getType() const;
     //Setters
     void setSide(double pSide);
-
+    void setType(std::string squareName);
     //Override virtual methods
 
     virtual void move(double deltaX, double deltaY) override;;

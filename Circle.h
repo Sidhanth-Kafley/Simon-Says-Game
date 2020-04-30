@@ -40,7 +40,7 @@ public:
     virtual void moveY(double deltaY) override ;
 
     //virtual void draw() = 0;
-    void draw(int x, int y) const override;
+    void draw() const override;
 
 
 private:

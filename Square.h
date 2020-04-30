@@ -39,6 +39,13 @@ public:
     //Getters
     double getSide() const;
     std::string getType() const;
+    int getLeftX() const;
+    int getRightX() const;
+    int getTopY() const;
+    int getBottomY() const;
+
+    bool isOverlapping(int x, int y) const;
+
     //Setters
     void setSide(double pSide);
     void setType(std::string squareName);
@@ -48,7 +55,7 @@ public:
     virtual void moveX(double deltaX) override;
     virtual void moveY(double deltaY) override;
 
-    void draw(int x, int y) const override;
+    void draw() const override;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SQUARE_H

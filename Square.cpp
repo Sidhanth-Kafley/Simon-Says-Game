@@ -90,6 +90,34 @@ void Square::setType(std::string squareName) {
     }
 
 }
+
+
+int Square::getLeftX() const {
+    return center.x; //- (side);
+}
+
+int Square::getRightX() const {
+    return center.x + (side);
+}
+
+
+int Square::getTopY() const {
+    return center.y; //- (side / 2);
+}
+
+int Square::getBottomY() const {
+    return center.y + (side);
+}
+
+
+bool Square::isOverlapping(int x, int y) const {
+        if ((x > getLeftX() && x < getRightX()) && (y > getTopY() && y < getBottomY())){
+            return true;
+
+        }
+    return false;
+}
+
 void Square::move(double deltaX, double deltaY) {
     center.x += deltaX;
     center.y += deltaY;
@@ -104,18 +132,21 @@ void Square::moveY(double deltaY) {
 }
 
 
-void Square::draw(int x, int y) const{
+
+
+void Square::draw() const{
     glColor3f(fill.red, fill.green, fill.blue);
     glBegin(GL_QUADS);
     // glVertex2i takes a 2-D (x, y) coordinate
-    glVertex2i(x, y);
 
-    glVertex2i(x, y+150);
+    glVertex2i(center.x, center.y);
+
+    glVertex2i(center.x, center.y+150);
 
 
-    glVertex2i(x+200, y+150);
+    glVertex2i(center.x+150, center.y+150);
 
-    glVertex2i(x+200, y);
+    glVertex2i(center.x+150, center.y);
     glEnd();
 }
 

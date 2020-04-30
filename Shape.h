@@ -57,6 +57,7 @@ public:
     double getOpacity() const;
     std::string getType() const;
 
+
     /* Setters */
     void setColor(color c);
     void setColor(double r, double g, double b, double a);
@@ -66,9 +67,10 @@ public:
     void setOpacity(double a);
 
 
+
     //virtual void draw() = 0;
    // virtual void draw() const;
-    virtual void draw(int x, int y) const = 0;
+    virtual void draw() const = 0;
 };
 
 #endif //SH_SK_FINAL_PROJECT_GRAPHICS_SHAPE_H

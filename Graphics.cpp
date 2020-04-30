@@ -61,17 +61,26 @@ void display() {
         }
     } else if (state == game) {
         first.setType("square1");
-        first.draw(50, 100);
-        first.move(245,450);
+        first.setCenter(50,100);
+        first.setSide(150);
+        first.draw();
+        //first.move(400,500);
 
         second.setType("square2");
-        second.draw(500, 100);
+        second.setCenter(500, 100);
+        second.setSide(150);
+        second.draw();
+
 
         third.setType("square3");
-        third.draw(50, 500);
+        third.setCenter(50,500);
+        third.setSide(150);
+        third.draw();
 
         fourth.setType("square4");
-        fourth.draw(500, 500);
+        fourth.setCenter(500,500);
+        fourth.setSide(150);
+        fourth.draw();
 
 
 
@@ -139,53 +148,32 @@ void mouse(int button, int state, int x, int y) {
     string number4 =  fourth.getType();
 
 
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && number1 == "square1"){
-
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN &&  first.isOverlapping(x,y)){
+            first.setColor(1,1,1,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
             first.setColor(0,1,0,1);
-
-/*
-        if (number2 == "square2"){
-            second.setColor(1,0,0,1);
-        }
-        if (number3 == "square3"){
-            second.setColor(0,0,1,1);
-        }
-        if (number4 == "square4"){
-            second.setColor(1,0,1,1);
-        }*/
-
-    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-
-        if (number1 == "square1"){
-            first.setColor(0,0,0,1);
-        } /*else if (number2 == "square2"){
-            second.setColor(0,0,0,1);
-        } else if (number3 == "square3"){
-            third.setColor(0,0,0,1);
-        }else if (number4 == "square4"){
-            fourth.setColor(0,0,0,1);
-        }*/
     }
 
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && number2 == "square2"){
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && second.isOverlapping(x,y)){
+        second.setColor(1,1,1,1);
+    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         second.setColor(1,0,0,1);
-    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-        second.setColor(0,0,0,1);
     }
 
-    /*if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-        second.setColor(0,1,0,1);
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && third.isOverlapping(x,y)){
+        third.setColor(1,1,1,1);
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-        second.setColor(0,0,0,1);
-    }if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-        third.setColor(0,1,0,1);
+        third.setColor(1,1,0,1);
+    }
+
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && fourth.isOverlapping(x,y)){
+        fourth.setColor(1,1,1,1);
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-        third.setColor(0,0,0,1);
-    }if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-        fourth.setColor(0,1,0,1);
-    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
-        fourth.setColor(0,0,0,1);
-    }*/
+        fourth.setColor(1,0,1,1);
+    }
+
+
     glutPostRedisplay();
 }
 

@@ -20,7 +20,7 @@ Button::Button(color fill, point center, unsigned int width, unsigned int height
 
 }
 
-void Button::draw(int x, int y) const {
+void Button::draw() const {
 
 
     //Shape2D::draw();

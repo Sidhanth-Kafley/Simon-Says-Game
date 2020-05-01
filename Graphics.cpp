@@ -52,7 +52,7 @@ void initGL() {
  whenever the window needs to be re-painted. */
 void display() {
     // Tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width, height); // DO NOT CHANGE THIS LINE
+    glViewport(0, 0, width*2, height*2); // DO NOT CHANGE THIS LINE
 
     // Do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
@@ -215,6 +215,7 @@ void mouse(int button, int state, int x, int y) {
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
                 level = nextSequence(level);
+                userClickedPattern.clear();
 //            //passed = true;
             }
         }
@@ -231,6 +232,7 @@ void mouse(int button, int state, int x, int y) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
 
                 level = nextSequence(level);
+                userClickedPattern.clear();
 //            //passed = true;
             }
         }
@@ -245,6 +247,7 @@ void mouse(int button, int state, int x, int y) {
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
                 level = nextSequence(level);
+                userClickedPattern.clear();
 //            //passed = true;
             }
         }
@@ -261,6 +264,7 @@ void mouse(int button, int state, int x, int y) {
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
                 level = nextSequence(level);
+                userClickedPattern.clear();
 //            //passed = true;
             }
         }

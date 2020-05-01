@@ -16,9 +16,25 @@ Square first({0, 1,0});
 Square second({1, 0, 0});
 Square third({1,1, 0});
 Square fourth({1,0,1,0});
-
+vector<string> enemyChosenColor={};
+vector<string> userClickedPattern = {};
 Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 screen state = startGame;
+
+void addGreenColor(){
+    userClickedPattern.push_back("green");
+}
+void addRedColor(){
+    userClickedPattern.push_back("red");
+}
+void addYellowColor(){
+    userClickedPattern.push_back("yellow");
+}
+void addPurpleColor(){
+    userClickedPattern.push_back("purple");
+}
+
+
 void init() {
     width = 900;
     height = 900;
@@ -86,9 +102,6 @@ void display() {
         fourth.setSide(150);
         fourth.draw();
 
-        vector<string> enemyChosenColor={};
-        vector<string> gamePattern = {};
-        vector<string> userClickedPattern = {};
 
         string enemyColor = nextSequence();
         enemyChosenColor.push_back(enemyColor);
@@ -105,14 +118,14 @@ void display() {
 //            fourth.setColor(1.0,1.0,1.0,1.0);
 //        }
 
-//        for(int i = 0; i< enemyChosenColor.size(); i++){
-//            if(enemyChosenColor[i]==userClickedPattern[i]){
-//                //do something
-//            }
+        for(int i = 0; i< enemyChosenColor.size(); i++){
+            if(enemyChosenColor[i]==userClickedPattern[i]){
+                state = finish;
+            }
 //            else{
 //                state = finish;
 //            }
-//        }
+       }
 
     } else if (state == finish) {
         glColor3f(1.0, 0.0, 0.0);
@@ -182,15 +195,19 @@ void mouse(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN &&  first.isOverlapping(x,y)){
             first.setColor(1,1,1,1);
         //userClickedPattern.push_back("green");
+
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
             first.setColor(0,1,0,1);
+        addGreenColor();
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && second.isOverlapping(x,y)){
         second.setColor(1,1,1,1);
         //userClickedPattern.push_back("red");
+
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         second.setColor(1,0,0,1);
+        addRedColor();
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && third.isOverlapping(x,y)){
@@ -198,14 +215,17 @@ void mouse(int button, int state, int x, int y) {
         //userClickedPattern.push_back("yellow");
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         third.setColor(1,1,0,1);
+        addYellowColor();
     }
 
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && fourth.isOverlapping(x,y)){
         fourth.setColor(1,1,1,1);
         //userClickedPattern.push_back("purple");
+
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         fourth.setColor(1,0,1,1);
+        addPurpleColor();
     }
 
 
@@ -214,10 +234,11 @@ void mouse(int button, int state, int x, int y) {
 
 
 string nextSequence(){
-    int randomNumber = rand() % 3;
-    vector<string> buttonColours = {"red", "purple", "green", "yellow"};
-    string randomColor = buttonColours[randomNumber];
-    return randomColor;
+//    int randomNumber = rand() % 3;
+//    vector<string> buttonColours = {"red", "purple", "green", "yellow"};
+//    string randomColor = buttonColours[randomNumber];
+//    return randomColor;
+    return "red";
 }
 
 

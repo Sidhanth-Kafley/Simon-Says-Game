@@ -2,8 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "Square.h"
-#include "Button.h"
-#include "Circle.h"
+
 #include <string>
 #include <ctime>
 
@@ -22,7 +21,6 @@ vector<string> userClickedPattern = {};
 
 vector<int> levelNumbers = {};
 vector<int> endGame = {1};
-//Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 screen stateScreen = startGame;
 
 void addGreenColor(){
@@ -52,7 +50,7 @@ void init() {
 /* Initialize OpenGL Graphics */
 void initGL() {
     // Set "clearing" or background color
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Black and opaque
+    glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Blue and opaque
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
@@ -77,25 +75,54 @@ void display() {
      */
     // Set the color to draw
     // Note: you can change this at any time during the drawing process
-   // s.draw();
-    //button1.draw();
-    //c.draw();
-    //first.move(245,450);
+
     if (stateScreen == startGame) {
-        glColor3f(1.0, 0.0, 0.0);
-        glRasterPos2i(245, 450);
-        for (const char &letter : "Welcome to Simon Says! Press g to begin!"){
-            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
+        glColor3f(1.0, 1.0, 1.0);
+        glRasterPos2i(150, 450);
+        for (const char &letter : "Welcome to Simon Says! Press i for instructions or g to begin!") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
         }
 
-        // handles timer
 
-    } else if (stateScreen == game) {
+    }else if (stateScreen == instruction){
+        glColor3f(1.0, 1.0, 1.0);
+
+        glRasterPos2i(250, 300);
+        for (const char &letter : "INSTRUCTIONS FOR SIMON SAYS") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+
+        glRasterPos2i(75, 450);
+        for (const char &letter : "This is a Simon Says Game. Your enemy will show you a sequence of colors. ") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+        glRasterPos2i(75, 500);
+        for (const char &letter : "However, as you move on to the next level, the enemy will only display that level's ") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+        glRasterPos2i(75, 550);
+        for (const char &letter : "sequence, so must remember the previous pattern. ") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+
+        glRasterPos2i(75, 600);
+        for (const char &letter : "In order to win, you must complete all 10 levels.") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+
+
+        glRasterPos2i(300, 650);
+        for (const char &letter : "Press 'g' to begin.") {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+
+
+    }else if (stateScreen == game) {
         first.setType("square1");
         first.setCenter(50,100);
         first.setSide(150);
         first.draw();
-        //first.move(400,500);
+
 
         second.setType("square2");
         second.setCenter(500, 100);
@@ -114,39 +141,10 @@ void display() {
         fourth.draw();
 
 
-       // enemyColor = nextSequence();
-        //
-        //glutTimerFunc(5000, timer, 0);
-//        if(enemyColor == "green"){
-//            first.setColor(1.0,1.0,1.0,1.0);
-//        }
-//        else if(enemyColor == "red"){
-//            second.setColor(1.0,1.0,1.0,1.0);
-//        }
-//        else if(enemyColor == "yellow"){
-//            third.setColor(1.0,1.0,1.0,1.0);
-//        }
-//        else{
-//            fourth.setColor(1.0,1.0,1.0,1.0);
-//        }
-
-//        for(int i = 0; i< userClickedPattern.size(); i++){
-//           if(enemyChosenColor[i]==userClickedPattern[i]){
-//               nextSequence();
-//            }
-//           else{
-//               state = start;
-//            }
-       //}
-
-//        if (isCorrectSequence() == false){
-//            state = finish;
-//        }
-        //isCorrectSequence();
-
-        if(levelNumbers.size() == 5){
-            stateScreen = finish;
+        if(levelNumbers.size() == 9){
+            stateScreen = winner;
         }
+
         if(endGame.size() == 2){
             stateScreen = finish;
         }
@@ -155,10 +153,17 @@ void display() {
 
     } else if (stateScreen == finish) {
         glColor3f(1.0, 0.0, 0.0);
-        glRasterPos2i(130, 200);
-        for (const char &letter : "Game over!"){
-            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
+        glRasterPos2i(130, 500);
+        for (const char &letter : "Game over! The enemy has outsmarted you!"){
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
         }
+    } else if (stateScreen == winner){
+        glColor3f(1.0, 0.0, 0.0);
+        glRasterPos2i(130, 200);
+        for (const char &letter : "Congratulations! You have outsmarted your enemy!"){
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, letter);
+        }
+
     }
 
     glFlush();  // Render now
@@ -178,10 +183,24 @@ void kbd(unsigned char key, int x, int y)
 
     }
 
-    if (stateScreen == startGame && key == 'g'){
+    if (stateScreen == startGame && (key == 'g' || key == 'G')){
         stateScreen = game;
         glutTimerFunc(1000, timer, 0);
     }
+
+    if (stateScreen == startGame && key == 'i' || key == 'I' ){
+        stateScreen = instruction;
+
+
+    }
+
+    if (stateScreen == instruction && (key == 'g' || key == 'G')){
+        stateScreen = game;
+        glutTimerFunc(1000, timer, 0);
+    }
+
+
+
     glutPostRedisplay();
 }
 
@@ -211,7 +230,7 @@ void cursor(int x, int y) {
 
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
-//string
+
 void mouse(int button, int state, int x, int y) {
     string number1 =  first.getType();
     string number2 =  second.getType();
@@ -221,7 +240,6 @@ void mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN &&  first.isOverlapping(x,y)){
             first.setColor(1,1,1,1);
-        //userClickedPattern.push_back("green");
 
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && first.isOverlapping(x,y)) {
             first.setColor(0,1,0,1);
@@ -234,7 +252,7 @@ void mouse(int button, int state, int x, int y) {
 
 
         }
-        if (level <= 6 && userClickedPattern.size() == enemyChosenColor.size()) {
+        if (level <= 10 && userClickedPattern.size() == enemyChosenColor.size()) {
                   level = nextSequence(level);
                    userClickedPattern.clear();
         }
@@ -243,7 +261,7 @@ void mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && second.isOverlapping(x,y)){
         second.setColor(1,1,1,1);
-        //userClickedPattern.push_back("red");
+
 
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && second.isOverlapping(x,y)){
         second.setColor(1,0,0,1);
@@ -256,7 +274,7 @@ void mouse(int button, int state, int x, int y) {
 
 
         }
-        if (level <= 6 && userClickedPattern.size() == enemyChosenColor.size()) {
+        if (level <= 10 && userClickedPattern.size() == enemyChosenColor.size()) {
             level = nextSequence(level);
             userClickedPattern.clear();
         }
@@ -264,7 +282,7 @@ void mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && third.isOverlapping(x,y)){
         third.setColor(1,1,1,1);
-        //userClickedPattern.push_back("yellow");
+
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP&& third.isOverlapping(x,y)){
         third.setColor(1,1,0,1);
         addYellowColor();
@@ -278,7 +296,7 @@ void mouse(int button, int state, int x, int y) {
 
 
         }
-        if (level <= 6 && userClickedPattern.size() == enemyChosenColor.size()) {
+        if (level <= 10 && userClickedPattern.size() == enemyChosenColor.size()) {
             level = nextSequence(level);
             userClickedPattern.clear();
         }
@@ -287,7 +305,7 @@ void mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && fourth.isOverlapping(x,y)){
         fourth.setColor(1,1,1,1);
-        //userClickedPattern.push_back("purple");
+
 
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && fourth.isOverlapping(x,y)){
         fourth.setColor(1,0,1,1);
@@ -300,7 +318,7 @@ void mouse(int button, int state, int x, int y) {
 
 
         }
-        if (level <= 6 && userClickedPattern.size() == enemyChosenColor.size()) {
+        if (level <= 10 && userClickedPattern.size() == enemyChosenColor.size()) {
             level = nextSequence(level);
             userClickedPattern.clear();
         }
@@ -309,52 +327,19 @@ void mouse(int button, int state, int x, int y) {
 
     glutPostRedisplay();
 }
-/*
-void isCorrectSequence(){
-   // bool passed = true;
-
-    for(int i = 0; i< userClickedPattern.size(); i++){
-        if(enemyChosenColor[i] == userClickedPattern[i]) {
-            cout << enemyChosenColor[i]<<endl;
-            cout << userClickedPattern[i]<<endl;
-            //passed = true;
-            enemyColor = nextSequence();
-            enemyChosenColor.push_back(enemyColor);
-        } else{
-           // passed = false;
-            state = finish;
-        }
-    }
-
-
-}*/
 
 
 int nextSequence(int level) {
 
-//    for (int i = 0; i < userClickedPattern.size(); i++) {
-//        if (enemyChosenColor[i] == userClickedPattern[i]) {
-//            cout << enemyChosenColor[i] << endl;
-//            cout << userClickedPattern[i] << endl;
-            //passed = true;
-       // }
-//        else {
-//            // passed = false;
-//            state = finish;
-//        }
-
-    //}
 
     levelNumbers.push_back(level);
     int randomNumber = rand() % 3;
     vector<string> buttonColours = {"red", "purple", "green", "yellow"};
     string randomColor = buttonColours[randomNumber];
-    cout << randomColor << endl;
     enemyColor = randomColor;
     enemyChosenColor.push_back(enemyColor);
     glutTimerFunc(2000, timer, 0);
     level++;
-    cout << level << endl;
     return level;
 
 }
@@ -399,7 +384,7 @@ void timer(int dummy) {
             fourth.setColor(1.0,0.0,1.0,1.0);
 
         }
-       // glutPostRedisplay();
+
     }
 
     glutPostRedisplay();
@@ -441,18 +426,9 @@ int main(int argc, char** argv) {
 
     // handles mouse click
     glutMouseFunc(mouse);
-    //glutMouseFunc(mouse2);
 
 
-//    enemyColor = nextSequence();
-//    cout<<enemyColor<<endl;
-//    for(int i = 0; i< enemyChosenColor.size(); i++){
-//        if(enemyChosenColor[i]==userClickedPattern[i]){
-//            state = finish;
-//        }
-//        else{
-//            state = finish;
-//        }
+
     // Enter the event-processing loop
     glutMainLoop();
 

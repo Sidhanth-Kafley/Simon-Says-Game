@@ -28,7 +28,7 @@ file(GLOB SOURCE_FILES
         *.h
         )
 
-add_executable(graphics ${SOURCE_FILES} Shape.h Shape.cpp Shape2d.cpp Shape2d.h Square.h Square.cpp Circle.h Circle.cpp)
+add_executable(graphics ${SOURCE_FILES} Shape.h Shape.cpp Shape2d.cpp Shape2d.h Square.h Square.cpp)
 
 if (WIN32)
     target_link_libraries (graphics ${OPENGL_LIBRARIES} freeglut)

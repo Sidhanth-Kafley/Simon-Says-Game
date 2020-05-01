@@ -17,7 +17,7 @@
 #include <string>
 
 enum screen{
-    startGame, game, finish
+    startGame, game, finish, winner, instruction
 };
 
 // Program initialization NOT OpenGL/GLUT dependent,

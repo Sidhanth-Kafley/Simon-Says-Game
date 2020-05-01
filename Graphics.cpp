@@ -12,6 +12,7 @@ using namespace std;
 string enemyColor;
 GLdouble width, height;
 int wd;
+int level = 1;
 Square first({0, 1,0});
 Square second({1, 0, 0});
 Square third({1,1, 0});
@@ -51,7 +52,7 @@ void initGL() {
  whenever the window needs to be re-painted. */
 void display() {
     // Tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width*2, height*2); // DO NOT CHANGE THIS LINE
+    glViewport(0, 0, width, height); // DO NOT CHANGE THIS LINE
 
     // Do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
@@ -213,7 +214,7 @@ void mouse(int button, int state, int x, int y) {
         addGreenColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                nextSequence();
+                level = nextSequence(level);
 //            //passed = true;
             }
         }
@@ -228,7 +229,8 @@ void mouse(int button, int state, int x, int y) {
         addRedColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                nextSequence();
+
+                level = nextSequence(level);
 //            //passed = true;
             }
         }
@@ -242,7 +244,7 @@ void mouse(int button, int state, int x, int y) {
         addYellowColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                nextSequence();
+                level = nextSequence(level);
 //            //passed = true;
             }
         }
@@ -258,7 +260,7 @@ void mouse(int button, int state, int x, int y) {
         addPurpleColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                nextSequence();
+                level = nextSequence(level);
 //            //passed = true;
             }
         }
@@ -288,7 +290,8 @@ void isCorrectSequence(){
 }*/
 
 
-void nextSequence() {
+int nextSequence(int level) {
+
 //    for (int i = 0; i < userClickedPattern.size(); i++) {
 //        if (enemyChosenColor[i] == userClickedPattern[i]) {
 //            cout << enemyChosenColor[i] << endl;
@@ -307,6 +310,9 @@ void nextSequence() {
     cout << randomColor << endl;
     enemyColor = randomColor;
     glutTimerFunc(2000, timer, 0);
+    level++;
+    cout << level << endl;
+    return level;
 
 }
 

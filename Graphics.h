@@ -52,6 +52,6 @@ void start();
 
 void isCorrectSequence();
 
-void nextSequence();
+int nextSequence(int level);
 
 #endif /* graphics_h */

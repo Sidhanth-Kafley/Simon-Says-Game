@@ -50,6 +50,8 @@ void mouse(int button, int state, int x, int y);
 
 void start();
 
+void isCorrectSequence();
+
 std::string nextSequence();
 
 #endif /* graphics_h */

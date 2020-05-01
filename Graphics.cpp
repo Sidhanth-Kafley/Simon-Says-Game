@@ -18,7 +18,7 @@ Square third({1,1, 0});
 Square fourth({1,0,1,0});
 vector<string> enemyChosenColor={};
 vector<string> userClickedPattern = {};
-Button button1({1,0,0}, {100,100}, 100, 50, "Square");
+//Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 screen state = startGame;
 
 void addGreenColor(){
@@ -51,7 +51,7 @@ void initGL() {
  whenever the window needs to be re-painted. */
 void display() {
     // Tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width*2, height*2); // DO NOT CHANGE THIS LINE
+    glViewport(0, 0, width, height); // DO NOT CHANGE THIS LINE
 
     // Do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
@@ -79,6 +79,9 @@ void display() {
         for (const char &letter : "Welcome to Simon Says! Press g to begin!"){
             glutBitmapCharacter(GLUT_BITMAP_8_BY_13, letter);
         }
+        enemyColor = "red";
+        // handles timer
+        glutTimerFunc(2000, timer, 0);
     } else if (state == game) {
         first.setType("square1");
         first.setCenter(50,100);
@@ -103,9 +106,9 @@ void display() {
         fourth.draw();
 
 
-        enemyColor = nextSequence();
-        enemyChosenColor.push_back(enemyColor);
-        glutTimerFunc(5000, timer, 0);
+       // enemyColor = nextSequence();
+        //enemyChosenColor.push_back(enemyColor);
+        //glutTimerFunc(5000, timer, 0);
 //        if(enemyColor == "green"){
 //            first.setColor(1.0,1.0,1.0,1.0);
 //        }
@@ -119,16 +122,24 @@ void display() {
 //            fourth.setColor(1.0,1.0,1.0,1.0);
 //        }
 
-        for(int i = 0; i< userClickedPattern.size(); i++){
-            if(enemyChosenColor[i]==userClickedPattern[i]){
-                cout << enemyChosenColor[i]<<endl;
-                cout << userClickedPattern[i]<<endl;
+        //for(int i = 0; i< userClickedPattern.size(); i++){
+        //    if(enemyChosenColor[i]==userClickedPattern[i]){
+                //cout << enemyChosenColor[i]<<endl;
+                //cout << userClickedPattern[i]<<endl;
 
-            }
+          //  }
 //           else{
 //               state = start;
 //            }
-       }
+      // }
+
+//        if (isCorrectSequence() == false){
+//            state = finish;
+//        }
+        //isCorrectSequence();
+
+
+
 
     } else if (state == finish) {
         glColor3f(1.0, 0.0, 0.0);
@@ -234,14 +245,33 @@ void mouse(int button, int state, int x, int y) {
 
     glutPostRedisplay();
 }
+/*
+void isCorrectSequence(){
+   // bool passed = true;
+
+    for(int i = 0; i< userClickedPattern.size(); i++){
+        if(enemyChosenColor[i] == userClickedPattern[i]) {
+            cout << enemyChosenColor[i]<<endl;
+            cout << userClickedPattern[i]<<endl;
+            //passed = true;
+            enemyColor = nextSequence();
+            enemyChosenColor.push_back(enemyColor);
+        } else{
+           // passed = false;
+            state = finish;
+        }
+    }
+
+
+}*/
 
 
 string nextSequence(){
-//    int randomNumber = rand() % 3;
-//    vector<string> buttonColours = {"red", "purple", "green", "yellow"};
-//    string randomColor = buttonColours[randomNumber];
-//    return randomColor;
-    return "red";
+    int randomNumber = rand() % 3;
+    vector<string> buttonColours = {"red", "purple", "green", "yellow"};
+    string randomColor = buttonColours[randomNumber];
+    return randomColor;
+
 }
 
 
@@ -249,35 +279,45 @@ void timer(int dummy) {
     if(dummy == 0){
         if(enemyColor == "green"){
             first.setColor(1.0,1.0,1.0,1.0);
+           // glutPostRedisplay();
         }
         else if(enemyColor == "red"){
             second.setColor(1.0,1.0,1.0,1.0);
+           // glutPostRedisplay();
         }
         else if(enemyColor == "yellow"){
             third.setColor(1.0,1.0,1.0,1.0);
+           // glutPostRedisplay();
         }
         else if(enemyColor == "purple"){
             fourth.setColor(1.0,1.0,1.0,1.0);
+           // glutPostRedisplay();
         }
-        glutPostRedisplay();
+
         dummy++;
-        glutTimerFunc(5000, timer, dummy);
+        glutTimerFunc(1000, timer, dummy);
     }
     else{
         if(enemyColor == "green"){
             first.setColor(0.0,1.0,0.0,1.0);
+            //glutPostRedisplay();
         }
         else if(enemyColor == "red"){
             second.setColor(1.0,0.0,0.0,1.0);
+           // glutPostRedisplay();
         }
         else if(enemyColor == "yellow"){
             third.setColor(1.0,1.0,0.0,1.0);
+           // glutPostRedisplay();
         }
         else if(enemyColor == "purple"){
             fourth.setColor(1.0,0.0,1.0,1.0);
+           // glutPostRedisplay();
         }
-        glutPostRedisplay();
+       // glutPostRedisplay();
     }
+
+    glutPostRedisplay();
 
 
 }
@@ -318,8 +358,7 @@ int main(int argc, char** argv) {
     glutMouseFunc(mouse);
     //glutMouseFunc(mouse2);
 
-    // handles timer
-    glutTimerFunc(0, timer, 0);
+
 //    enemyColor = nextSequence();
 //    cout<<enemyColor<<endl;
 //    for(int i = 0; i< enemyChosenColor.size(); i++){

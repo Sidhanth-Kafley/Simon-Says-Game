@@ -14,6 +14,8 @@
 #include <GL/glut.h>
 #endif
 
+#include <string>
+
 enum screen{
     startGame, game, finish
 };
@@ -43,8 +45,11 @@ void cursor(int x, int y);
 void timer(int dummy);
 
 // Handle mouse button pressed and released events
+//std::mouse
 void mouse(int button, int state, int x, int y);
 
 void start();
+
+std::string nextSequence();
 
 #endif /* graphics_h */

@@ -4,21 +4,25 @@
 #include "Square.h"
 #include "Button.h"
 #include "Circle.h"
+#include <string>
+#include <ctime>
+
 
 using namespace std;
 
 GLdouble width, height;
 int wd;
-Square first;
-Square second;
-Square third;
-Square fourth;
+Square first({0, 1,0});
+Square second({1, 0, 0});
+Square third({1,1, 0});
+Square fourth({1,0,1,0});
 
 Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 screen state = startGame;
 void init() {
     width = 900;
     height = 900;
+    srand(time(0));
 }
 
 /* Initialize OpenGL Graphics */
@@ -31,7 +35,7 @@ void initGL() {
  whenever the window needs to be re-painted. */
 void display() {
     // Tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width, height); // DO NOT CHANGE THIS LINE
+    glViewport(0, 0, width*2, height*2); // DO NOT CHANGE THIS LINE
 
     // Do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
@@ -82,7 +86,33 @@ void display() {
         fourth.setSide(150);
         fourth.draw();
 
+        vector<string> enemyChosenColor={};
+        vector<string> gamePattern = {};
+        vector<string> userClickedPattern = {};
 
+        string enemyColor = nextSequence();
+        enemyChosenColor.push_back(enemyColor);
+//        if(enemyColor == "green"){
+//            first.setColor(1.0,1.0,1.0,1.0);
+//        }
+//        else if(enemyColor == "red"){
+//            second.setColor(1.0,1.0,1.0,1.0);
+//        }
+//        else if(enemyColor == "yellow"){
+//            third.setColor(1.0,1.0,1.0,1.0);
+//        }
+//        else{
+//            fourth.setColor(1.0,1.0,1.0,1.0);
+//        }
+
+//        for(int i = 0; i< enemyChosenColor.size(); i++){
+//            if(enemyChosenColor[i]==userClickedPattern[i]){
+//                //do something
+//            }
+//            else{
+//                state = finish;
+//            }
+//        }
 
     } else if (state == finish) {
         glColor3f(1.0, 0.0, 0.0);
@@ -141,6 +171,7 @@ void cursor(int x, int y) {
 
 // button will be GLUT_LEFT_BUTTON or GLUT_RIGHT_BUTTON
 // state will be GLUT_UP or GLUT_DOWN
+//string
 void mouse(int button, int state, int x, int y) {
     string number1 =  first.getType();
     string number2 =  second.getType();
@@ -150,18 +181,21 @@ void mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN &&  first.isOverlapping(x,y)){
             first.setColor(1,1,1,1);
+        //userClickedPattern.push_back("green");
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
             first.setColor(0,1,0,1);
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && second.isOverlapping(x,y)){
         second.setColor(1,1,1,1);
+        //userClickedPattern.push_back("red");
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         second.setColor(1,0,0,1);
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && third.isOverlapping(x,y)){
         third.setColor(1,1,1,1);
+        //userClickedPattern.push_back("yellow");
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         third.setColor(1,1,0,1);
     }
@@ -169,6 +203,7 @@ void mouse(int button, int state, int x, int y) {
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && fourth.isOverlapping(x,y)){
         fourth.setColor(1,1,1,1);
+        //userClickedPattern.push_back("purple");
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP){
         fourth.setColor(1,0,1,1);
     }
@@ -178,7 +213,12 @@ void mouse(int button, int state, int x, int y) {
 }
 
 
-
+string nextSequence(){
+    int randomNumber = rand() % 3;
+    vector<string> buttonColours = {"red", "purple", "green", "yellow"};
+    string randomColor = buttonColours[randomNumber];
+    return randomColor;
+}
 
 
 void timer(int dummy) {
@@ -229,12 +269,6 @@ int main(int argc, char** argv) {
     // Enter the event-processing loop
     glutMainLoop();
 
-    vector<string> buttonColours = {"red", "blue", "green", "yellow"};
-
-    vector<string> gamePattern = {};
-    vector<string> userClickedPattern = {};
-
-    int level = 0;
 
     return 0;
 }

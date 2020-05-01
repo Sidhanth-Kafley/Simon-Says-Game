@@ -51,7 +51,7 @@ void initGL() {
  whenever the window needs to be re-painted. */
 void display() {
     // Tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width, height); // DO NOT CHANGE THIS LINE
+    glViewport(0, 0, width*2, height*2); // DO NOT CHANGE THIS LINE
 
     // Do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
@@ -107,7 +107,7 @@ void display() {
 
 
        // enemyColor = nextSequence();
-        //enemyChosenColor.push_back(enemyColor);
+        enemyChosenColor.push_back(enemyColor);
         //glutTimerFunc(5000, timer, 0);
 //        if(enemyColor == "green"){
 //            first.setColor(1.0,1.0,1.0,1.0);
@@ -122,16 +122,14 @@ void display() {
 //            fourth.setColor(1.0,1.0,1.0,1.0);
 //        }
 
-        //for(int i = 0; i< userClickedPattern.size(); i++){
-        //    if(enemyChosenColor[i]==userClickedPattern[i]){
-                //cout << enemyChosenColor[i]<<endl;
-                //cout << userClickedPattern[i]<<endl;
-
-          //  }
+//        for(int i = 0; i< userClickedPattern.size(); i++){
+//           if(enemyChosenColor[i]==userClickedPattern[i]){
+//               nextSequence();
+//            }
 //           else{
 //               state = start;
 //            }
-      // }
+       //}
 
 //        if (isCorrectSequence() == false){
 //            state = finish;
@@ -213,6 +211,12 @@ void mouse(int button, int state, int x, int y) {
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && first.isOverlapping(x,y)) {
             first.setColor(0,1,0,1);
         addGreenColor();
+        for(int i = 0; i< userClickedPattern.size(); i++) {
+            if (enemyChosenColor[i] == userClickedPattern[i]) {
+                nextSequence();
+//            //passed = true;
+            }
+        }
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && second.isOverlapping(x,y)){
@@ -222,6 +226,12 @@ void mouse(int button, int state, int x, int y) {
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && second.isOverlapping(x,y)){
         second.setColor(1,0,0,1);
         addRedColor();
+        for(int i = 0; i< userClickedPattern.size(); i++) {
+            if (enemyChosenColor[i] == userClickedPattern[i]) {
+                nextSequence();
+//            //passed = true;
+            }
+        }
     }
 
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && third.isOverlapping(x,y)){
@@ -230,6 +240,12 @@ void mouse(int button, int state, int x, int y) {
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP&& third.isOverlapping(x,y)){
         third.setColor(1,1,0,1);
         addYellowColor();
+        for(int i = 0; i< userClickedPattern.size(); i++) {
+            if (enemyChosenColor[i] == userClickedPattern[i]) {
+                nextSequence();
+//            //passed = true;
+            }
+        }
     }
 
 
@@ -240,6 +256,12 @@ void mouse(int button, int state, int x, int y) {
     } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && fourth.isOverlapping(x,y)){
         fourth.setColor(1,0,1,1);
         addPurpleColor();
+        for(int i = 0; i< userClickedPattern.size(); i++) {
+            if (enemyChosenColor[i] == userClickedPattern[i]) {
+                nextSequence();
+//            //passed = true;
+            }
+        }
     }
 
 
@@ -266,11 +288,25 @@ void isCorrectSequence(){
 }*/
 
 
-string nextSequence(){
+void nextSequence() {
+//    for (int i = 0; i < userClickedPattern.size(); i++) {
+//        if (enemyChosenColor[i] == userClickedPattern[i]) {
+//            cout << enemyChosenColor[i] << endl;
+//            cout << userClickedPattern[i] << endl;
+            //passed = true;
+       // }
+//        else {
+//            // passed = false;
+//            state = finish;
+//        }
+
+    //}
     int randomNumber = rand() % 3;
     vector<string> buttonColours = {"red", "purple", "green", "yellow"};
     string randomColor = buttonColours[randomNumber];
-    return randomColor;
+    cout << randomColor << endl;
+    enemyColor = randomColor;
+    glutTimerFunc(2000, timer, 0);
 
 }
 

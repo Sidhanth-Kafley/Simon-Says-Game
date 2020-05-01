@@ -52,6 +52,6 @@ void start();
 
 void isCorrectSequence();
 
-std::string nextSequence();
+void nextSequence();
 
 #endif /* graphics_h */

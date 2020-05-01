@@ -105,6 +105,7 @@ void display() {
 
         enemyColor = nextSequence();
         enemyChosenColor.push_back(enemyColor);
+        glutTimerFunc(5000, timer, 0);
 //        if(enemyColor == "green"){
 //            first.setColor(1.0,1.0,1.0,1.0);
 //        }
@@ -245,9 +246,40 @@ string nextSequence(){
 
 
 void timer(int dummy) {
+    if(dummy == 0){
+        if(enemyColor == "green"){
+            first.setColor(1.0,1.0,1.0,1.0);
+        }
+        else if(enemyColor == "red"){
+            second.setColor(1.0,1.0,1.0,1.0);
+        }
+        else if(enemyColor == "yellow"){
+            third.setColor(1.0,1.0,1.0,1.0);
+        }
+        else if(enemyColor == "purple"){
+            fourth.setColor(1.0,1.0,1.0,1.0);
+        }
+        glutPostRedisplay();
+        dummy++;
+        glutTimerFunc(5000, timer, dummy);
+    }
+    else{
+        if(enemyColor == "green"){
+            first.setColor(0.0,1.0,0.0,1.0);
+        }
+        else if(enemyColor == "red"){
+            second.setColor(1.0,0.0,0.0,1.0);
+        }
+        else if(enemyColor == "yellow"){
+            third.setColor(1.0,1.0,0.0,1.0);
+        }
+        else if(enemyColor == "purple"){
+            fourth.setColor(1.0,0.0,1.0,1.0);
+        }
+        glutPostRedisplay();
+    }
 
-    glutPostRedisplay();
-    glutTimerFunc(30, timer, dummy);
+
 }
 void start(){
 

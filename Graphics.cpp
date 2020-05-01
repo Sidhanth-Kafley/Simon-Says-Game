@@ -19,8 +19,9 @@ Square third({1,1, 0});
 Square fourth({1,0,1,0});
 vector<string> enemyChosenColor={};
 vector<string> userClickedPattern = {};
+vector<int> levelNumbers = {};
 //Button button1({1,0,0}, {100,100}, 100, 50, "Square");
-screen state = startGame;
+screen stateScreen = startGame;
 
 void addGreenColor(){
     userClickedPattern.push_back("green");
@@ -52,7 +53,7 @@ void initGL() {
  whenever the window needs to be re-painted. */
 void display() {
     // Tell OpenGL to use the whole window for drawing
-    glViewport(0, 0, width*2, height*2); // DO NOT CHANGE THIS LINE
+    glViewport(0, 0, width, height); // DO NOT CHANGE THIS LINE
 
     // Do an orthographic parallel projection with the coordinate
     // system set to first quadrant, limited by screen/window size
@@ -74,7 +75,7 @@ void display() {
     //button1.draw();
     //c.draw();
     //first.move(245,450);
-    if (state == startGame) {
+    if (stateScreen == startGame) {
         glColor3f(1.0, 0.0, 0.0);
         glRasterPos2i(245, 450);
         for (const char &letter : "Welcome to Simon Says! Press g to begin!"){
@@ -83,7 +84,7 @@ void display() {
         enemyColor = "red";
         // handles timer
         glutTimerFunc(2000, timer, 0);
-    } else if (state == game) {
+    } else if (stateScreen == game) {
         first.setType("square1");
         first.setCenter(50,100);
         first.setSide(150);
@@ -137,10 +138,14 @@ void display() {
 //        }
         //isCorrectSequence();
 
+        if(levelNumbers.size() == 5){
+            stateScreen = finish;
+        }
 
 
 
-    } else if (state == finish) {
+
+    } else if (stateScreen == finish) {
         glColor3f(1.0, 0.0, 0.0);
         glRasterPos2i(130, 200);
         for (const char &letter : "Game over!"){
@@ -165,8 +170,8 @@ void kbd(unsigned char key, int x, int y)
 
     }
 
-    if (state == startGame && key == 'g'){
-        state = game;
+    if (stateScreen == startGame && key == 'g'){
+        stateScreen = game;
     }
     glutPostRedisplay();
 }
@@ -214,8 +219,13 @@ void mouse(int button, int state, int x, int y) {
         addGreenColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                level = nextSequence(level);
-                userClickedPattern.clear();
+                if (level <= 6){
+                    level = nextSequence(level);
+                    userClickedPattern.clear();
+                } else {
+                    stateScreen = finish;
+                }
+
 //            //passed = true;
             }
         }
@@ -230,9 +240,12 @@ void mouse(int button, int state, int x, int y) {
         addRedColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-
-                level = nextSequence(level);
-                userClickedPattern.clear();
+                if (level <= 6){
+                    level = nextSequence(level);
+                    userClickedPattern.clear();
+                } else {
+                    stateScreen = finish;
+                }
 //            //passed = true;
             }
         }
@@ -246,8 +259,12 @@ void mouse(int button, int state, int x, int y) {
         addYellowColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                level = nextSequence(level);
-                userClickedPattern.clear();
+                if (level <= 6){
+                    level = nextSequence(level);
+                    userClickedPattern.clear();
+                } else {
+                    stateScreen = finish;
+                }
 //            //passed = true;
             }
         }
@@ -263,8 +280,12 @@ void mouse(int button, int state, int x, int y) {
         addPurpleColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                level = nextSequence(level);
-                userClickedPattern.clear();
+                if (level <= 6){
+                    level = nextSequence(level);
+                    userClickedPattern.clear();
+                } else {
+                    stateScreen = finish;
+                }
 //            //passed = true;
             }
         }
@@ -308,6 +329,8 @@ int nextSequence(int level) {
 //        }
 
     //}
+
+    levelNumbers.push_back(level);
     int randomNumber = rand() % 3;
     vector<string> buttonColours = {"red", "purple", "green", "yellow"};
     string randomColor = buttonColours[randomNumber];

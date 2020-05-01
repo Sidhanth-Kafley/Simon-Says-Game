@@ -20,6 +20,7 @@ Square fourth({1,0,1,0});
 vector<string> enemyChosenColor={};
 vector<string> userClickedPattern = {};
 vector<int> levelNumbers = {};
+vector<int> endGame = {1};
 //Button button1({1,0,0}, {100,100}, 100, 50, "Square");
 screen stateScreen = startGame;
 
@@ -141,7 +142,9 @@ void display() {
         if(levelNumbers.size() == 5){
             stateScreen = finish;
         }
-
+        if(endGame.size() == 2){
+            stateScreen = finish;
+        }
 
 
 
@@ -219,15 +222,17 @@ void mouse(int button, int state, int x, int y) {
         addGreenColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                if (level <= 6){
+                if (level <= 6) {
                     level = nextSequence(level);
                     userClickedPattern.clear();
-                } else {
-                    stateScreen = finish;
                 }
+            }
+            else {
+                endGame.push_back(2);
+            }
 
 //            //passed = true;
-            }
+
         }
     }
 
@@ -243,11 +248,13 @@ void mouse(int button, int state, int x, int y) {
                 if (level <= 6){
                     level = nextSequence(level);
                     userClickedPattern.clear();
-                } else {
-                    stateScreen = finish;
                 }
-//            //passed = true;
             }
+            else {
+                endGame.push_back(2);
+            }
+//            //passed = true;
+
         }
     }
 
@@ -262,11 +269,13 @@ void mouse(int button, int state, int x, int y) {
                 if (level <= 6){
                     level = nextSequence(level);
                     userClickedPattern.clear();
-                } else {
-                    stateScreen = finish;
                 }
-//            //passed = true;
             }
+            else {
+                endGame.push_back(2);
+            }
+//            //passed = true;
+
         }
     }
 
@@ -280,11 +289,11 @@ void mouse(int button, int state, int x, int y) {
         addPurpleColor();
         for(int i = 0; i< userClickedPattern.size(); i++) {
             if (enemyChosenColor[i] == userClickedPattern[i]) {
-                if (level <= 6){
+                if (level <= 6) {
                     level = nextSequence(level);
                     userClickedPattern.clear();
                 } else {
-                    stateScreen = finish;
+                    endGame.push_back(2);
                 }
 //            //passed = true;
             }

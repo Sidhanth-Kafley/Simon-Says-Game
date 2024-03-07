@@ -1,4 +1,6 @@
-#Sydney Hildreth and Sidhanth Kafley
+# Simon Says Game
+
+### - Sydney Hildreth and Sidhanth Kafley
 
 This is a memory game called Simon Says. Your "enemy" (aka the computer) will show you a sequence of colors first and then
 you must repeat the sequence back. However, as you move on to the next level, the enemy will only display that level's sequence 

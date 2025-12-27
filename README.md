@@ -26,7 +26,7 @@ clicks inside the square are registered to the correct color. You can use either
 - We used OpenGL/GLUT for the graphics aspect of the program.
 - C++ for core logic and game structure
 
-## How to Run the Project Locally
+## How to Run the Project Locally:
 
 ### Prerequisites
 
